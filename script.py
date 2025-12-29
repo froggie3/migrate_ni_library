@@ -7,7 +7,6 @@ BASE_PATH = r"SOFTWARE\Native Instruments"
 
 
 def normalize_path(path: str) -> str:
-    """末尾のバックスラッシュを除去"""
     return path.rstrip("\\")
 
 
@@ -91,7 +90,6 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    # paths を set に格納（正規化もここで）
     target_paths: Set[str] = {normalize_path(p) for p in args.paths}
 
     items = enumerate_items_with_content_dir()

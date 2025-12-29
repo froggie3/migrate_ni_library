@@ -7,9 +7,8 @@ Its primary purpose is to organize and migrate library locations.
 * Enumerates subkeys under `HKEY_LOCAL_MACHINE\SOFTWARE\Native Instruments`
 * Only includes entries with `ContentDir`
 * Temporarily normalizes `ContentDir` before comparison
-
 * Removes trailing backslashes
-* Rewrites only if it **exactly matches** the specified path set
+  * Rewrites only if it **exactly matches** the specified path set
 * The new `ContentDir` will be in the following format
 
 ```

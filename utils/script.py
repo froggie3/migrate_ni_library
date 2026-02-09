@@ -47,7 +47,6 @@ class NativeInstrumentsItem:
         return f"<NIItem {self.name}>"
 
 
-
 def enumerate_items_with_content_dir() -> List[NativeInstrumentsItem]:
     items: List[NativeInstrumentsItem] = []
 

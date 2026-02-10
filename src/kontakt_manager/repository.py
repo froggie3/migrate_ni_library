@@ -14,8 +14,6 @@ class LibraryRepository:
 
     def __init__(self, dry_run: bool = False):
         self.dry_run = dry_run
-        if self.dry_run:
-            logger.info("dry run enabled: no changes will be written")
 
     def fetch_all(self) -> list[Library]:
         """scans the registry for Kontakt libraries."""
@@ -86,9 +84,6 @@ class LibraryRepository:
         """Toggles the visibility of a library by setting/removing UserRemoved in HKCU."""
         hkcu_subpath = f"{self.HKCU_PATH}\\{library_id}"
 
-        action = "show" if visible else "hide"
-        logger.info(f"{action} {library_id}")
-
         if self.dry_run:
             return
 
@@ -98,12 +93,10 @@ class LibraryRepository:
                 if not visible:
                     # hide: set UserRemoved = 1
                     winreg.SetValueEx(key, "UserRemoved", 0, winreg.REG_DWORD, 1)
-                    logger.debug(f"set UserRemoved=1 for {library_id}")
                 else:
                     # show: remove UserRemoved value
                     try:
                         winreg.DeleteValue(key, "UserRemoved")
-                        logger.debug(f"deleted UserRemoved for {library_id}")
                     except FileNotFoundError:
                         pass  # already visible
         except OSError as e:
